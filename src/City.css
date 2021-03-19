@@ -1,0 +1,11 @@
+.City h1 {
+  padding-top: 50px;
+  font-weight: 800;
+  font-size: 35px;
+  padding-bottom: 20px;
+}
+
+.City p {
+  line-height: 15px;
+  font-size: 20px;
+}

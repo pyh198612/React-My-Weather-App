@@ -1,0 +1,13 @@
+.Forecast .small-image {
+  width: 70px;
+}
+
+.Forecast {
+  border: 1px solid;
+  border-color: transparent #49c3ee#49c3ee;
+
+  color: #686d76;
+  font-size: 20px;
+  background: white;
+  text-align: center;
+}

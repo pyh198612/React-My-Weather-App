@@ -1,0 +1,15 @@
+.CurrentWeather {
+  text-align: center;
+}
+
+.CurrentWeather h3 {
+  padding-bottom: 20px;
+  font-weight: 800;
+  font-size: 35px;
+  padding-top: 60px;
+}
+
+.CurrentWeather p {
+  line-height: 15px;
+  font-size: 20px;
+}

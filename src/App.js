@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import LocationArrow from "./LocationArrow";
 import City from "./City";
 import Image from "./Image";
@@ -68,7 +68,7 @@ export default function App() {
           </div>
         </form>
       </div>
-    <footer>The project was coded by <span className="coder">Jennifer Hsieh</span> and is <a href="https://github.com/pyh198612/weather-app-project" className="github-link" target="_blank"> open-sourced on GitHub </a> and <a href="https://ecstatic-poitras-d2bba5.netlify.app" className="hosting-link">hosted on Netlify</a></footer> 
+    <footer>The project was coded by <span className="coder">Jennifer Hsieh</span> and is <a href="https://github.com/pyh198612/React-My-Weather-App" className="github-link" target="_blank" rel="noopener"> open-sourced on GitHub </a> and <a href="https://ecstatic-poitras-d2bba5.netlify.app" className="hosting-link">hosted on Netlify</a></footer> 
     </div>
   );
 }

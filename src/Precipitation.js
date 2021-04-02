@@ -1,26 +1,24 @@
-import React, {useState} from "react";
 import axios from "axios";
+import React , {useState} from "react";
 
-export default function MinMaxTemperature(props) {
-
-  const [temp, setTemp] = useState ({ready:false});
+export default function Precipitation(props) {
+  const [precipitation, setPrecipitation] = useState ({ready:false});
 
   function handleResponse (response) {
-    setTemp ({
+    setPrecipitation ({
       ready: true,
-      min: Math.round (response.data.daily[0].temp.min),
-      max: Math.round (response.data.daily[0].temp.max),
+      rain: Math.round ((response.data.daily[0].pop)*100),
       }
     )
   }
 
 
   
-  if (temp.ready) {
+  if (precipitation.ready) {
     return (
-      <div className="MinMaxTempearature">
-        <span>{temp.min} </span> °/ <span>{temp.max}</span> °C
-      </div>
+      <span className="Precipitation">
+        <i className="fas fa-umbrella"></i> <span>{precipitation.rain}</span> %
+    </span>
   );
 } else {
   let longitude = props.lon;
@@ -33,5 +31,4 @@ export default function MinMaxTemperature(props) {
   return null;
 
   }
-
 }

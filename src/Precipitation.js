@@ -1,34 +1,38 @@
 import axios from "axios";
-import React , {useState} from "react";
+import React , {useState, useEffect} from "react";
 
 export default function Precipitation(props) {
-  const [precipitation, setPrecipitation] = useState ({ready:false});
+  const [ready, setReady] = useState (false);
+  const [precipitation, setPrecipitation] = useState ("");
+
+  useEffect (() => {
+   setReady  (false);
+ }, [props.coordinates]);
 
   function handleResponse (response) {
-    setPrecipitation ({
-      ready: true,
-      rain: Math.round ((response.data.daily[0].pop)*100),
-      }
-    )
+    setReady (true);
+    setPrecipitation (response.data.daily[0].pop*100);
+  }  
+
+  function searchPrecipitation () {
+    let longitude = props.coordinates.lon;
+    let latitude = props.coordinates.lat;
+    let excludes = "current,hourly,minutely,alerts";
+    let apiKey = "3cbad6f9a349042eb44901a3bdcb3200";
+    let apiOneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=${excludes}&appid=${apiKey}&units=metric`;
+    axios.get (apiOneCallUrl).then(handleResponse);
   }
 
 
   
-  if (precipitation.ready) {
+  if (ready) {
     return (
       <span className="Precipitation">
-        <i className="fas fa-umbrella"></i> <span>{precipitation.rain}</span> %
+        <i className="fas fa-umbrella"></i> <span>{Math.round(precipitation)}</span> %
     </span>
   );
 } else {
-  let longitude = props.lon;
-  let latitude = props.lat;
-  let excludes = "current,hourly,minutely,alerts";
-  let apiKey = "3cbad6f9a349042eb44901a3bdcb3200";
-  let apiOneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=${excludes}&appid=${apiKey}&units=metric`;
-  axios.get (apiOneCallUrl).then(handleResponse);
-
+  searchPrecipitation ();
   return null;
-
   }
 }

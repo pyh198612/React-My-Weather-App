@@ -1,35 +1,40 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 
 export default function MinMaxTemperature(props) {
+  const [ready, setReady] = useState (false);
+  const [temp, setTemp] = useState ("");
 
-  const [temp, setTemp] = useState ({ready:false});
+  useEffect (() => {
+    setReady  (false);
+  }, [props.coordinates]);
 
   function handleResponse (response) {
+    setReady (true);
     setTemp ({
-      ready: true,
       min: Math.round (response.data.daily[0].temp.min),
       max: Math.round (response.data.daily[0].temp.max),
       }
     )
   }
 
+  function searchMinMax () {
+    let longitude = props.coordinates.lon;
+    let latitude = props.coordinates.lat;
+    let excludes = "current,hourly,minutely,alerts";
+    let apiKey = "3cbad6f9a349042eb44901a3bdcb3200";
+    let apiOneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=${excludes}&appid=${apiKey}&units=metric`;
+    axios.get (apiOneCallUrl).then(handleResponse);
+  }
+
 
   
-  if (temp.ready) {
+  if (ready) {
     return (
-      <div className="MinMaxTempearature">
-        <span>{temp.min} </span> °/ <span>{temp.max}</span> °C
-      </div>
+      <span className="MinMaxTempearature"> {temp.max}° / {temp.min} °C</span>
   );
 } else {
-  let longitude = props.lon;
-  let latitude = props.lat;
-  let excludes = "current,hourly,minutely,alerts";
-  let apiKey = "3cbad6f9a349042eb44901a3bdcb3200";
-  let apiOneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=${excludes}&appid=${apiKey}&units=metric`;
-  axios.get (apiOneCallUrl).then(handleResponse);
-
+  searchMinMax ();
   return null;
 
   }

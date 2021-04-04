@@ -17,5 +17,5 @@ export default function Image(props) {
   else if (icon === "13d" || icon === "13n") {icon = "/img/snow_13.png";}
   else if (icon === "50d" || icon === "50n") {icon = "/img/mist_50.png";}
 
-  return <img className="Image" src={icon} alt = "/" />;
+  return <img className="Image" src={icon} alt = {props.description} />;
 }

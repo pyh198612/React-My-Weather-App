@@ -3,7 +3,6 @@ import React from "react";
 export default function Time (props) {
   let localTime = props.value.getTime();
   let localOffset = props.value.getTimezoneOffset ()*60*1000;
-  console.log (localOffset);
   let utc = localTime + localOffset;
   let timezone = props.timezone*1000
   let convertedLocalTimestamp = utc+timezone;

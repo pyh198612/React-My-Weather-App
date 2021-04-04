@@ -17,3 +17,7 @@
 .CurrentWeather .description::first-letter {
   text-transform: capitalize;
 }
+
+.CurrentWeather .fas {
+  margin-left: 10px;
+}

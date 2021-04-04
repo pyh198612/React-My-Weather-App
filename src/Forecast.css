@@ -1,5 +1,8 @@
-.Forecast .small-image {
+.Forecast IMG {
   width: 70px;
+  position: relative;
+  left: 0px;
+  bottom: 0px;
 }
 
 .Forecast {

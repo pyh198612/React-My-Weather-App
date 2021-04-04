@@ -19,8 +19,8 @@ function handleResponse (response) {
     date: new Date(response.data.dt*1000),
     currentTemp: response.data.main.temp, 
     icon: response.data.weather[0].icon,
+    coordinates:response.data.coord,
     lon:response.data.coord.lon,
-    lat:response.data.coord.lat,
     wind: response.data.wind.speed,
     description: response.data.weather[0].description,
     timezone: response.data.timezone,
@@ -59,13 +59,12 @@ if (weatherData.ready) {
               />
           </div>
           <div className="col-3">
-            <Image icon={weatherData.icon}/>
+            <Image icon={weatherData.icon} description = {weatherData.description}/>
           </div>
           <div className="col-4">
             <CurrentWeather
               nowTemp={weatherData.currentTemp}
-              lon = {weatherData.lon}
-              lat = {weatherData.lat}
+              coordinates = {weatherData.coordinates}
               description={weatherData.description}
               wind={weatherData.wind}
               />
@@ -74,12 +73,7 @@ if (weatherData.ready) {
       </div>
 
       <div className="forecast-session">
-        <Forecast />
-        <Forecast />
-        <Forecast />
-        <Forecast />
-        <Forecast />
-        
+        <Forecast coordinates = {weatherData.coordinates} /> 
       </div> 
 
       <div className="search-session">

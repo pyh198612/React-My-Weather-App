@@ -14,15 +14,14 @@ export default function CurrentWeather(props) {
       </h3>
       <p>
         <MinMaxTemperature
-          lon={props.lon}
-          lat={props.lat}
+          coordinates = {props.coordinates}
         />
       </p>
       <p className="description">
         {props.description}
       </p>
       <p>
-        <span> <Precipitation lon={props.lon} lat={props.lat} /> </span> {""}{""}
+        <span> <Precipitation coordinates = {props.coordinates} /> </span> {""}{""}
         <span><i className="fas fa-wind"></i> {windSpeed} km/h </span>
       </p>
     </div>

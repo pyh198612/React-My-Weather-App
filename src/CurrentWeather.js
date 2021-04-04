@@ -8,7 +8,7 @@ export default function CurrentWeather(props) {
   
   function currentTemp () {
     let currentTemp = Math.round(props.nowTemp);
-    return `Now ${currentTemp} °C`;
+    return `Now  ${currentTemp} °C`;
   }
 
   function windSpeed (){

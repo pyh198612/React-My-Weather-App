@@ -12,12 +12,12 @@ export default function FullForecast (props) {
 
     function maxTemp (){
       let maxTemp=Math.round(props.data.temp.max);
-      return `${maxTemp}°`;
+      return `${maxTemp} °`;
     }
 
     function minTemp (){
       let minTemp=Math.round(props.data.temp.min);
-      return `${minTemp}°C`;
+      return `${minTemp} °C`;
     }
 
     function rain (){

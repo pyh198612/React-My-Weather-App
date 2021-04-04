@@ -31,7 +31,7 @@ export default function MinMaxTemperature(props) {
   
   if (ready) {
     return (
-      <span className="MinMaxTempearature"> {temp.max}° / {temp.min} °C</span>
+      <span className="MinMaxTempearature"> {temp.max} ° /{""} {temp.min} °C</span>
   );
 } else {
   searchMinMax ();

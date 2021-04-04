@@ -76,3 +76,8 @@
 .App .coder {
   font-weight: bold;
 }
+
+.App .loader {
+  text-align: center;
+  margin-top: 300px;
+}

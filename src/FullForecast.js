@@ -5,17 +5,31 @@ import Image from "./Image";
 
 export default function FullForecast (props) {
 
-   let time= new Date ((props.data.dt)*1000);
+    let time= new Date ((props.data.dt)*1000);
     //timezone: response.data.timezone_offset,
     let icon= props.data.weather[0].icon;
-    let maxTemp=Math.round(props.data.temp.max);
-    let minTemp=Math.round(props.data.temp.min);
-    let rain=Math.round ((props.data.pop)*100);
-    let wind=Math.round (props.data.wind_speed * 3600/1000);
     let description=props.data.weather[0].description;
-    
 
+    function maxTemp (){
+      let maxTemp=Math.round(props.data.temp.max);
+      return `${maxTemp}°`;
+    }
 
+    function minTemp (){
+      let minTemp=Math.round(props.data.temp.min);
+      return `${minTemp}°C`;
+    }
+
+    function rain (){
+      let rain=Math.round ((props.data.pop)*100);
+      return `${rain}%`;
+    }
+
+    function windSpeed (){
+      let wind=Math.round (props.data.wind_speed * 3600/1000);
+      return `${wind} km/h`;
+
+    }
 
 
     return (
@@ -33,11 +47,11 @@ export default function FullForecast (props) {
               <Image icon={icon} description = {description} />
             </div>
             <div className="col-2">
-              <span > {maxTemp}° / {minTemp} °C </span>
+              <span > {maxTemp()} / {minTemp ()} </span>
             </div>
             <div className="col-2">
-              <i className="fas fa-umbrella"></i> {rain}% <br/>
-              <i className="fas fa-wind"></i> {wind} km/h
+              <i className="fas fa-umbrella"></i> {rain()} <br/>
+              <i className="fas fa-wind"></i> {windSpeed ()}
             </div>
             <div className="col-1" />
             </div>

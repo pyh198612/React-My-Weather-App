@@ -8,37 +8,47 @@ export default function Time (props) {
   let convertedLocalTimestamp = utc+timezone;
   let newTime = new Date (convertedLocalTimestamp);
 
-  let date = newTime.getDate ();
-  let newDate = (`0`+date).slice(-2);
-  let month = newTime.getMonth()+1;
-  let newMonth = (`0`+month).slice(-2);
-  let year = newTime.getFullYear();
+  function showFullDate (){
+    let date = newTime.getDate ();
+    let newDate = (`0`+date).slice(-2);
+    let month = newTime.getMonth()+1;
+    let newMonth = (`0`+month).slice(-2);
+    let year = newTime.getFullYear();
+    return  `${newDate}.${newMonth}.${year} Today`;
+  }
 
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  let day = days[newTime.getDay()];
+  function showDay (){
+    let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let day = days[newTime.getDay()];
+    return `${day}`;
+  }
 
-  let minutes = newTime.getMinutes();
-  if (minutes<10) {minutes = `0${minutes}`;}
-  
-  let hour = newTime.getHours();
-  let timeUnit = "am";
-  if (hour === 0) {hour = hour+12;}
-  else if (hour === 12) {timeUnit = "pm";} 
-  else if (hour > 12) {hour = (`0` +(hour-12)).slice(-2);
-  timeUnit = "pm";}
-  else if (hour < 10 && hour > 0) {hour = `0${hour}`;}
+  function showExactTime(){
+    let minutes = newTime.getMinutes();
+    if (minutes<10) {minutes = `0${minutes}`;}
+    
+    let hour = newTime.getHours();
+    let timeUnit = "am";
+    if (hour === 0) {hour = hour+12;}
+    else if (hour === 12) {timeUnit = "pm";} 
+    else if (hour > 12) {hour = (`0` +(hour-12)).slice(-2);
+    timeUnit = "pm";}
+    else if (hour < 10 && hour > 0) {hour = `0${hour}`;}
+
+    return  `${hour}:${minutes} ${timeUnit}`;
+  }
 
   
   return (
     <div className="Date">
       <div>
-       {newDate}.{newMonth}.{year} Today
+       {showFullDate()}
       </div>
       <div>
-       {day}
+       {showDay()}
       </div>
       <div>
-       {hour}:{minutes} {timeUnit}
+       {showExactTime()}
       </div>
     </div>
   );

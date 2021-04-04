@@ -3,6 +3,8 @@ import React from "react";
 import "./Image.css";
 
 export default function Image(props) {
+  let alt = props.description;
+
   let icon = props.icon;
   if (icon === "01d") { icon = "/img/sunny_01d.png"; }  
   else if (icon === "01n") { icon = "/img/clear sky_01n.png"; }  
@@ -17,5 +19,5 @@ export default function Image(props) {
   else if (icon === "13d" || icon === "13n") {icon = "/img/snow_13.png";}
   else if (icon === "50d" || icon === "50n") {icon = "/img/mist_50.png";}
 
-  return <img className="Image" src={icon} alt = {props.description} />;
+  return <img className="Image" src={icon} alt = {alt} />;
 }

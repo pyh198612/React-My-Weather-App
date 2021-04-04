@@ -15,7 +15,6 @@ export default function Forecast (props) {
  }, [props.coordinates]);
 
 function handleForecastResponse (response) {
-  console.log (response.data);
     setForecast (response.data.daily);
     setReady (true);
   }

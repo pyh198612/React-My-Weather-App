@@ -4,15 +4,16 @@ import Image from "./Image";
 import CurrentWeather from "./CurrentWeather";
 import Forecast from "./Forecast";
 import axios from "axios";
+import Loader from "react-loader-spinner";
 
 import './App.css';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export default function App() {
 const [weatherData, setWeatherData] = useState ({ready:false});
 const [city, setCity] = useState ("Hamburg");
 
 function handleResponse (response) {
-  //console.log (response.data);
   setWeatherData ({
     ready:true,
     city:response.data.name,
@@ -28,7 +29,7 @@ function handleResponse (response) {
 }
 
 function search () {
-  const apiKey = "3a9100c603465e570bc2bcef2b73f0f6";
+  const apiKey = "3cbad6f9a349042eb44901a3bdcb3200";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(handleResponse);
 }
@@ -40,6 +41,19 @@ function handleSubmit (event) {
 
 function handleCityChange (event) {
  setCity (event.target.value);
+}
+
+function showPosition (position) {
+  let latitude = position.coords.latitude; 
+  let longitude = position. coords.longitude;
+  const apiKey = "3cbad6f9a349042eb44901a3bdcb3200";
+  let apiLocationUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+  axios.get(apiLocationUrl).then(handleResponse);
+}
+
+function handleLocationButton (event){
+  event.preventDefault ();
+  navigator.geolocation.getCurrentPosition (showPosition);
 }
 
 
@@ -92,7 +106,7 @@ if (weatherData.ready) {
             </div>
             <div className="col-3">
               <div className="form-group">
-                <input type="submit" value="My Location" className="form-control rounded-pill current-button" autoComplete="on" />
+                <input type="submit" value="My Location" className="form-control rounded-pill current-button" autoComplete="on" onClick = {handleLocationButton}/>
               </div>
             </div>
           </div>
@@ -103,7 +117,11 @@ if (weatherData.ready) {
   );
 } else {
   search ();
-  return "Loading... ";
+  return (
+    <div className="App">
+      <Loader type="Puff" color="#48c6ef" height={150} width={150} className="loader"/>
+    </div>
+  );
 }
 }
 

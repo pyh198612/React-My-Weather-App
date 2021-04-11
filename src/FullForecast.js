@@ -56,7 +56,6 @@ export default function FullForecast (props) {
             <div className="col-1" />
             </div>
         <p />
-        <hr/>
       </div> 
     )
 }

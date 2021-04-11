@@ -38,6 +38,7 @@ if (ready) {
             return (
             <div key={index}>
                <FullForecast data = {dailyForecast} />
+               {index<5 && <hr/>}
             </div>
           );} else {
             return null;
